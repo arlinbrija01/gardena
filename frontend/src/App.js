@@ -528,14 +528,14 @@ const AdminPage = ({ user, onLogout }) => {
     }
   };
 
-  const handleChangePassword = async () => {
-    if (!selectedUser || !newPasswordForUser) return;
+  const handleChangePassword = async (userId) => {
+    if (!userId || !newPasswordForUser) return;
 
     try {
-      await axios.put(`${API}/users/${selectedUser.id}/password`, {
+      await axios.put(`${API}/users/${userId}/password`, {
         new_password: newPasswordForUser,
       });
-      setSelectedUser(null);
+      setOpenPasswordDialog(null);
       setNewPasswordForUser("");
       toast.success("Password modificata con successo");
     } catch (error) {
