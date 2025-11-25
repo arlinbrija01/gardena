@@ -639,13 +639,21 @@ const AdminPage = ({ user, onLogout }) => {
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    <Dialog>
+                    <Dialog open={openPasswordDialog === u.id} onOpenChange={(open) => {
+                      if (!open) {
+                        setOpenPasswordDialog(null);
+                        setNewPasswordForUser("");
+                      }
+                    }}>
                       <DialogTrigger asChild>
                         <Button
                           variant="outline"
                           size="sm"
                           data-testid={`change-password-button-${u.id}`}
-                          onClick={() => setSelectedUser(u)}
+                          onClick={() => {
+                            setOpenPasswordDialog(u.id);
+                            setNewPasswordForUser("");
+                          }}
                           className="border-slate-300 text-slate-700 hover:bg-slate-100"
                         >
                           <Lock className="w-4 h-4 mr-2" />
@@ -661,9 +669,9 @@ const AdminPage = ({ user, onLogout }) => {
                         </DialogHeader>
                         <div className="space-y-4 py-4">
                           <div className="space-y-2">
-                            <Label htmlFor="change-password" className="text-slate-700">Nuova password</Label>
+                            <Label htmlFor={`change-password-${u.id}`} className="text-slate-700">Nuova password</Label>
                             <Input
-                              id="change-password"
+                              id={`change-password-${u.id}`}
                               data-testid={`change-password-input-${u.id}`}
                               type="password"
                               placeholder="Nuova password"
@@ -676,7 +684,7 @@ const AdminPage = ({ user, onLogout }) => {
                         <DialogFooter>
                           <Button
                             data-testid={`change-password-confirm-${u.id}`}
-                            onClick={handleChangePassword}
+                            onClick={() => handleChangePassword(u.id)}
                             className="bg-slate-700 hover:bg-slate-800 text-white"
                           >
                             Conferma
