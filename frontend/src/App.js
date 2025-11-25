@@ -733,39 +733,6 @@ const AdminPage = ({ user, onLogout }) => {
         </Card>
       </div>
 
-      <Dialog open={!!selectedUser} onOpenChange={(open) => !open && setSelectedUser(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Cambia password</DialogTitle>
-            <DialogDescription>
-              Inserisci la nuova password per {selectedUser?.username}.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="new-user-password" className="text-slate-700">Nuova password</Label>
-              <Input
-                id="new-user-password"
-                data-testid="dialog-change-password-input"
-                type="password"
-                placeholder="Nuova password"
-                value={newPasswordForUser}
-                onChange={(e) => setNewPasswordForUser(e.target.value)}
-                className="border-slate-300 focus:border-slate-500"
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              data-testid="dialog-change-password-confirm"
-              onClick={handleChangePassword}
-              className="bg-slate-700 hover:bg-slate-800 text-white"
-            >
-              Conferma
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
