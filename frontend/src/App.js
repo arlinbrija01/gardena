@@ -513,9 +513,13 @@ const AdminPage = ({ user, onLogout }) => {
       await axios.post(`${API}/users`, {
         username: newUsername,
         password: newPassword,
+        first_name: newFirstName,
+        last_name: newLastName,
       });
       setNewUsername("");
       setNewPassword("");
+      setNewFirstName("");
+      setNewLastName("");
       toast.success("Utente creato con successo");
       fetchUsers();
     } catch (error) {
