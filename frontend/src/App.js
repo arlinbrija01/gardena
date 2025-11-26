@@ -588,6 +588,34 @@ const AdminPage = ({ user, onLogout }) => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleCreateUser} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="new-first-name" className="text-slate-700">Nome</Label>
+                  <Input
+                    id="new-first-name"
+                    data-testid="admin-new-first-name-input"
+                    type="text"
+                    placeholder="Nome"
+                    value={newFirstName}
+                    onChange={(e) => setNewFirstName(e.target.value)}
+                    required
+                    className="border-slate-300 focus:border-slate-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="new-last-name" className="text-slate-700">Cognome</Label>
+                  <Input
+                    id="new-last-name"
+                    data-testid="admin-new-last-name-input"
+                    type="text"
+                    placeholder="Cognome"
+                    value={newLastName}
+                    onChange={(e) => setNewLastName(e.target.value)}
+                    required
+                    className="border-slate-300 focus:border-slate-500"
+                  />
+                </div>
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="new-username" className="text-slate-700">Nome utente</Label>
                 <Input
