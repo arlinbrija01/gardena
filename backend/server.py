@@ -88,11 +88,13 @@ async def get_user_from_session(session_id: Optional[str]) -> Optional[dict]:
 
 async def create_default_admin():
     """Create default admin user if it doesn't exist"""
-    existing_admin = await db.users.find_one({"username": "admin"})
+    existing_admin = await db.users.find_one({"username": {"$regex": "^admin$", "$options": "i"}})
     if not existing_admin:
         admin_user = {
             "id": str(uuid.uuid4()),
             "username": "admin",
+            "first_name": "Admin",
+            "last_name": "Sistema",
             "password": hash_password("admin"),
             "is_admin": True,
             "created_at": datetime.now(timezone.utc).isoformat()
