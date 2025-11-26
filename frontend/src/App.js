@@ -668,13 +668,13 @@ const AdminPage = ({ user, onLogout }) => {
                 >
                   <div>
                     <p className="font-medium text-slate-800" data-testid={`user-username-${u.id}`}>
-                      {u.username}
+                      {u.first_name} {u.last_name}
                       {u.is_admin && (
                         <span className="ml-2 text-xs bg-slate-700 text-white px-2 py-1 rounded">ADMIN</span>
                       )}
                     </p>
                     <p className="text-sm text-slate-500">
-                      Creato il {new Date(u.created_at).toLocaleDateString('it-IT')}
+                      Username: {u.username} • Creato il {new Date(u.created_at).toLocaleDateString('it-IT')}
                     </p>
                   </div>
                   <div className="flex gap-2">
