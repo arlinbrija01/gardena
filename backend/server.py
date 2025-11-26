@@ -55,7 +55,7 @@ class Post(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str
     author_id: str
-    author_username: str
+    author_name: str
     content: str
     created_at: str
 
