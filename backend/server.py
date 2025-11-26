@@ -105,7 +105,8 @@ async def create_default_admin():
 # Auth endpoints
 @api_router.post("/auth/login")
 async def login(credentials: UserLogin, response: Response):
-    user = await db.users.find_one({"username": credentials.username})
+    # Case-insensitive username search
+    user = await db.users.find_one({"username": {"$regex": f"^{credentials.username}$", "$options": "i"}})
     
     if not user or not verify_password(credentials.password, user['password']):
         raise HTTPException(status_code=401, detail="Credenziali non valide")
