@@ -33,12 +33,16 @@ class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str
     username: str
+    first_name: str
+    last_name: str
     is_admin: bool
     created_at: str
 
 class UserCreate(BaseModel):
     username: str
     password: str
+    first_name: str
+    last_name: str
 
 class UserLogin(BaseModel):
     username: str
