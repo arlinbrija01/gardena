@@ -135,6 +135,8 @@ async def login(credentials: UserLogin, response: Response):
     return {
         "id": user['id'],
         "username": user['username'],
+        "first_name": user['first_name'],
+        "last_name": user['last_name'],
         "is_admin": user['is_admin']
     }
 
