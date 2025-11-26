@@ -220,6 +220,35 @@ const HomePage = ({ user, onLogout }) => {
       </nav>
 
       <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+        <Card className="shadow-md" data-testid="search-card">
+          <CardContent className="pt-6">
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                <Input
+                  data-testid="search-input"
+                  type="text"
+                  placeholder="Cerca nei post..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 border-slate-300 focus:border-slate-500"
+                />
+              </div>
+              {searchQuery && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  data-testid="clear-search-button"
+                  onClick={() => setSearchQuery("")}
+                  className="border-slate-300 text-slate-700 hover:bg-slate-100"
+                >
+                  Cancella
+                </Button>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
         <Card className="shadow-md" data-testid="create-post-card">
           <CardHeader>
             <CardTitle className="text-xl text-slate-800">Crea un nuovo post</CardTitle>
@@ -242,41 +271,6 @@ const HomePage = ({ user, onLogout }) => {
               >
                 {loading ? "Pubblicazione..." : "Pubblica"}
               </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-md" data-testid="search-card">
-          <CardContent className="pt-6">
-            <form onSubmit={handleSearch} className="flex gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                <Input
-                  data-testid="search-input"
-                  type="text"
-                  placeholder="Cerca nei post..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 border-slate-300 focus:border-slate-500"
-                />
-              </div>
-              <Button type="submit" data-testid="search-button" className="bg-slate-700 hover:bg-slate-800 text-white">
-                Cerca
-              </Button>
-              {searchQuery && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  data-testid="clear-search-button"
-                  onClick={() => {
-                    setSearchQuery("");
-                    fetchPosts();
-                  }}
-                  className="border-slate-300 text-slate-700 hover:bg-slate-100"
-                >
-                  Cancella
-                </Button>
-              )}
             </form>
           </CardContent>
         </Card>
