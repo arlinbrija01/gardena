@@ -104,6 +104,19 @@ const HomePage = ({ user, onLogout }) => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    // Ricerca in tempo reale
+    const delaySearch = setTimeout(() => {
+      if (searchQuery.trim()) {
+        handleSearch();
+      } else {
+        fetchPosts();
+      }
+    }, 300);
+
+    return () => clearTimeout(delaySearch);
+  }, [searchQuery]);
+
   const fetchPosts = async () => {
     try {
       const response = await axios.get(`${API}/posts`);
@@ -142,8 +155,7 @@ const HomePage = ({ user, onLogout }) => {
     }
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async () => {
     if (!searchQuery.trim()) {
       fetchPosts();
       return;
