@@ -251,7 +251,7 @@ async def create_post(post_data: PostCreate, session_id: Optional[str] = Cookie(
     new_post = {
         "id": str(uuid.uuid4()),
         "author_id": user['id'],
-        "author_username": user['username'],
+        "author_name": f"{user['first_name']} {user['last_name']}",
         "content": post_data.content,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
