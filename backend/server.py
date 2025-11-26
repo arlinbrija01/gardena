@@ -171,14 +171,16 @@ async def create_user(user_data: UserCreate, session_id: Optional[str] = Cookie(
     if not user or not user.get('is_admin'):
         raise HTTPException(status_code=403, detail="Accesso negato")
     
-    # Check if username already exists
-    existing = await db.users.find_one({"username": user_data.username})
+    # Check if username already exists (case-insensitive)
+    existing = await db.users.find_one({"username": {"$regex": f"^{user_data.username}$", "$options": "i"}})
     if existing:
         raise HTTPException(status_code=400, detail="Nome utente già esistente")
     
     new_user = {
         "id": str(uuid.uuid4()),
         "username": user_data.username,
+        "first_name": user_data.first_name,
+        "last_name": user_data.last_name,
         "password": hash_password(user_data.password),
         "is_admin": False,
         "created_at": datetime.now(timezone.utc).isoformat()
