@@ -479,6 +479,8 @@ const AdminPage = ({ user, onLogout }) => {
   const [users, setUsers] = useState([]);
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newFirstName, setNewFirstName] = useState("");
+  const [newLastName, setNewLastName] = useState("");
   const [loading, setLoading] = useState(false);
   const [newPasswordForUser, setNewPasswordForUser] = useState("");
   const [openPasswordDialog, setOpenPasswordDialog] = useState(null);
