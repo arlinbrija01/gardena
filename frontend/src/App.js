@@ -289,7 +289,7 @@ const HomePage = ({ user, onLogout }) => {
                   <div className="flex justify-between items-start">
                     <div>
                       <CardTitle className="text-lg text-slate-800" data-testid={`post-author-${post.id}`}>
-                        {post.author_username}
+                        {post.author_name}
                       </CardTitle>
                       <CardDescription data-testid={`post-date-${post.id}`}>
                         {formatDate(post.created_at)}
